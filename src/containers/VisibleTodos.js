@@ -2,8 +2,21 @@ import { connect } from '../react-redux';
 
 import TodosList from '../components/TodosList';
 
-const mapStateToProps = (store) => ({
-  todos: store.getState().todos,
+import { toggleTodo } from '../actions';
+
+const getVisibleTodos = (todos, filter) => {
+  switch (filter) {
+    case 'SHOW_COMPLETED':
+      return todos.filter(t => t.isComplited);
+    case 'SHOW_ACTIVE':
+      return todos.filter(t => !t.isComplited);
+    default:
+      return todos;
+  }
+};
+
+const mapStateToProps = (state) => ({
+  todos: getVisibleTodos(state.todos, state.visibilityFilter),
 });
 
-export default connect(mapStateToProps)(TodosList);
+export default connect(mapStateToProps, { toggleTodo })(TodosList);

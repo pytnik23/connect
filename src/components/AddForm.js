@@ -6,12 +6,20 @@ class AddForm extends Component {
     value: '',
   }
 
+  handleChange = (e) => {
+    this.setState({ value: e.target.value });
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
 
-    this.props.onSubmit(this.state.value);
+    const value = this.state.value;
 
-    this.resetForm();
+    if (value) {
+      this.props.onSubmit(this.state.value);
+
+      this.resetForm();
+    }
   }
 
   resetForm = () => this.setState({ value: '' });

@@ -10,6 +10,7 @@ export default (state = [], action) => {
         ...state,
         {
           text: action.text,
+          id: action.id,
           isCompited: false,
         },
       ];

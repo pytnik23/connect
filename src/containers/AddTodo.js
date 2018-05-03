@@ -4,10 +4,4 @@ import { addTodo } from '../actions';
 
 import AddForm from '../components/AddForm';
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addTodo: (text) => dispatch(addTodo(text)),
-  };
-};
-
-export default connect(null, mapDispatchToProps)(AddForm);
+export default connect(null, { onSubmit: addTodo })(AddForm);
